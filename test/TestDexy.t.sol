@@ -83,16 +83,16 @@ contract TestDexy is Test {
         //get hash of the event sign
         bytes32 eventSignature = keccak256("PairCreated(address,address,address)");
         for (uint256 i = 0; i < entries.length; i++) {
-            // 🧬 Check if the event matches our PairCreated event signature
+           
             if (entries[i].topics[0] == eventSignature) {
-                // 🔍 Compare indexed topic[1] to address(weth)
+               
                 assertEq(address(uint160(uint256(entries[i].topics[1]))), address(weth));
-                // 🔍 Compare indexed topic[2] to address(usdc)
+                
                 assertEq(address(uint160(uint256(entries[i].topics[2]))), address(usdc));
-                // 🔍 Compare indexed topic[3] to address(pool)
+                
                 assertEq(address(uint160(uint256(entries[i].topics[3]))), address(pool));
 
-                // ✅ If all match, mark the event as found
+                
                 found = true;
                 break; // no need to keep looping
             }
