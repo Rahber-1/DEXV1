@@ -56,9 +56,11 @@ git clone https://github.com/your-username/dexy-dex.git
 cd dexy-dex
 
 ## 📦 Install Dependencies
-forge install & forge build forge test
+`forge install` &
+`forge build`
+`forge test`
 
 ## 🔬 Deploy Locally
-anvil
+`anvil`
 forge script script/Deploy.s.sol --fork-url http://localhost:8545 --broadcast --private-key ANVIL_ACCOUNT_PRIVATE_KEY
 
