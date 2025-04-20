@@ -1,66 +1,64 @@
-## Foundry
+# ⚖️ Dexy DEX
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A lightweight and educational **Decentralized Exchange (DEX)** built with Solidity. Dexy allows users to create token pairs, provide liquidity, redeem LP tokens, and swap assets. Each token pair has its own liquidity pool based on the **constant product formula (x * y = k)**.
 
-Foundry consists of:
+---
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## 🛠️ Contracts Overview
 
-## Documentation
+### 1. `Dexy.sol`
+- Factory contract responsible for **creating token pairs**.
+- Stores mapping of pairs and their corresponding liquidity pools.
+- Emits an event when a new pair is created.
 
-https://book.getfoundry.sh/
+### 2. `DexyPool.sol`
+- Handles **liquidity management and token swaps**.
+- Mints LP tokens to liquidity providers.
+- Allows redemption of LP tokens for corresponding assets.
+- Swaps assets using the **x * y = k** formula.
 
-## Usage
+### 3. `DexyLiquidityToken.sol`
+- Custom ERC-20 LP token.
+- Only mintable/burnable by its associated DexyPool.
+- Tracks each user’s share in a specific pool.
 
-### Build
+---
 
-```shell
-$ forge build
-```
+## 🚀 Features
 
-### Test
+- 🔁 **Token Pair Creation**
+- 💧 **Add Liquidity / Redeem Liquidity**
+- 🔄 **Swap Between Tokens**
+- 🪙 **Custom LP Tokens per Pair**
+- 🔐 **Access Controlled LP Token Minting**
 
-```shell
-$ forge test
-```
+---
 
-### Format
+## 🧪 Example Workflow
 
-```shell
-$ forge fmt
-```
+1. ✅ Deploy `Dexy.sol`
+2. ✅ Call `createPair(tokenA, tokenB, nameA, nameB)`
+3. ✅ Call `addLiquidity` in the returned `DexyPool` address
+4. ✅ Use `redeemLiquidityToken` to withdraw your share
+5. ✅ Call `swapTokens` to swap between tokens in a pool
 
-### Gas Snapshots
+---
 
-```shell
-$ forge snapshot
-```
+## 📦 Dependencies
 
-### Anvil
+- [OpenZeppelin Contracts](https://github.com/OpenZeppelin/openzeppelin-contracts)
+  - `ERC20`
+  - `AccessControl`
+  - `Math`
 
-```shell
-$ anvil
-```
+## Get Started
+git clone https://github.com/your-username/dexy-dex.git
+cd dexy-dex
 
-### Deploy
+## 📦 Install Dependencies
+forge install & forge build forge test
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+## 🔬 Deploy Locally
+anvil
+forge script script/Deploy.s.sol --fork-url http://localhost:8545 --broadcast --private-key ANVIL_ACCOUNT_PRIVATE_KEY
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
